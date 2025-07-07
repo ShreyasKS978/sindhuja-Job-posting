@@ -5,7 +5,7 @@ services:
     image: postgres:16
     container_name: postgres-posting
     ports:
-      - "6565:5432"
+      - "5206:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123
@@ -19,7 +19,7 @@ services:
     build: ./Backend
     container_name: backend-posting
     ports:
-      - "3008:3008"
+      - "3206:3206"
     depends_on:
       - postgres
     environment:
@@ -28,29 +28,29 @@ services:
       DB_HOST: postgres
       DB_PORT: 5432
       DB_NAME: job_portal
-      PORT: 3008
+      PORT: 3206
     restart: unless-stopped
 
   employee-posting:
     build: ./Employee-posting
     container_name: Employee-posting
     ports:
-      - "8065:80"
+      - "8011:80"
     depends_on:
       - backend
     environment:
-      REACT_APP_API_URL: http://backend:3008
+      REACT_APP_API_URL: http://backend:3206
     restart: unless-stopped
 
   hr-posting:
     build: ./HR-posting
     container_name: HR-posting
     ports:
-      - "8066:80"
+      - "8012:80"
     depends_on:
       - backend
     environment:
-      REACT_APP_API_URL: http://backend:3008
+      REACT_APP_API_URL: http://backend:3206
     restart: unless-stopped
 
 volumes:
